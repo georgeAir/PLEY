@@ -21,7 +21,9 @@ class App extends Component {
 
   getRestaurants = () => {
     // fetch to the backend
-    fetch(baseUrl + '/restaurants')
+    fetch(baseUrl + '/restaurants' , {
+      credentials: 'include'
+    })
     .then(res => {
       if(res.status === 200) {
         return res.json()
