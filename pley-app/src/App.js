@@ -1,7 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
 
-=======
 let baseUrl = 'http://localhost:3003'
 
 class App extends Component {
@@ -57,5 +56,6 @@ class App extends Component {
       </div>
     );
   }
+}
 
-export default App;
+export default App
