@@ -43,6 +43,13 @@ export default class NewForm extends Component {
       <form onSubmit= {this.handleSumbit}>
         <label html='name'>Name: </label>
         <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+
+        <label html='name'>Cuisine Type: </label>
+        <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+
+        <label html='name'>Name: </label>
+        <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+
         <input type='submit' value='Add a restaurant'/>
       </form>
     )

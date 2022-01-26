@@ -1,4 +1,4 @@
-xport default function Nav(props) {
+export default function Nav(props) {
  return (
    <nav>
    <h1> PLEX </h1>

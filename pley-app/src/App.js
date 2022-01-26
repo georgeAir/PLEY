@@ -1,6 +1,10 @@
 import './App.css';
 import React, { Component } from 'react'
 import NewForm from './NewForm'
+import Nav from './Nav'
+
+
+
 
 let baseUrl = 'http://localhost:3003'
 
@@ -40,6 +44,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Nav />
         <h1>Restaurants! Celebrate! </h1>
         <NewForm />
         <table>
