@@ -5,7 +5,11 @@ export default class NewForm extends Component {
     super()
 
     this.state = {
-      name: ''
+      name: '',
+      cuisineType: '',
+      location: '',
+      description: '',
+      likes: '',
     }
   }
 
@@ -30,28 +34,37 @@ export default class NewForm extends Component {
   }
 
   handleChange = (event) => {
-    // console.log(event.target.value);
+    console.log(event.target.value);
     this.setState({
-      name: event.target.value
+      [event.target.id]: event.target.value,
     })
   }
 
 
   render(){
-    console.log(this.state.name);
+    console.log(this.state);
     return(
-      <form onSubmit= {this.handleSumbit}>
-        <label html='name'>Name: </label>
-        <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+      <>
+        <form onSubmit= {this.handleSumbit}>
+          <label html='name'>Name: </label>
+          <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
 
-        <label html='name'>Cuisine Type: </label>
-        <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+          <label html='name'>Cuisine Type: </label>
+          <input type='text' id='cuisineType' name='cuisineType' onChange={(event) => this.handleChange(event)} value={this.state.cuisineType}/>
 
-        <label html='name'>Name: </label>
-        <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
+          <label html='name'>Location: </label>
+          <input type='text' id='location' name='name' onChange={(event) => this.handleChange(event)} value={this.state.location}/>
 
-        <input type='submit' value='Add a restaurant'/>
-      </form>
+          <label html='name'>Description: </label>
+          <input type='text' id='description' name='name' onChange={(event) => this.handleChange(event)} value={this.state.description}/>
+
+          <label html='name'>Likes: </label>
+          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
+
+          <input type='submit' value='Add a restaurant'/>
+        </form>
+      </>
+
     )
   }
 }
