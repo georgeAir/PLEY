@@ -13,7 +13,9 @@ class App extends Component {
     super(props)
 
     this.state = {
-      restaurants: []
+      restaurants: [],
+      description: '',
+      modalOpen: false,
     }
     // if you do not use an arrow function for getRestaurants()
    // this.getRestaurants = this.getRestaurants.bind(this)
@@ -33,6 +35,16 @@ class App extends Component {
       this.setState({ restaurants: data })
     })
   }
+
+  showEditForm = (restaurant) => {
+  console.log(restaurant);
+  this.setState({
+    modalOpen: true,
+    name: restaurant.name,
+    description: restaurant.description,
+    holidayToBeEdited: restaurant,
+  })
+}
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
@@ -54,12 +66,25 @@ class App extends Component {
                   <tr key={i}>
                     <td key={restaurant._id}> {restaurant.name} </td>
                     <td> {restaurant.description} </td>
+                    <td onClick= {() => this.showEditForm(restaurant)}> Show Edit Form </td>
                   </tr>
                 )
               })
             }
           </tbody>
         </table>
+
+        {
+          this.state.modalOpen &&
+          <form onSubmit= {this.handleSumbit}>
+            <label>Name: </label>
+            <input name='name' value={this.state.name} onChange={this.handleChange}/> <br/>
+
+            <label>Description: </label>
+            <input name='description' value={this.state.description} onChange={this.handleChange}/> <br/>
+            <button> submit</button>
+          </form>
+        }
       </div>
     );
   }
