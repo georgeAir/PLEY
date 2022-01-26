@@ -1,7 +1,7 @@
 export default function Nav(props) {
  return (
    <nav>
-   <h1> PLEX </h1>
+   <h1> PLEY </h1>
      <form onSubmit={props.loginUser}>
        <label htmlFor="name">Username: </label>
        <input type="text" id="name" name="username"/>
