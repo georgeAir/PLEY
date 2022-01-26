@@ -1,8 +1,8 @@
 import './App.css';
-import React, { Component } from 'react'
+import React from 'react'
 import NewForm from './NewForm'
 import Nav from './Nav'
-import RestaurantInfo from './restaurantsInfo'
+import RestaurantInfo from './RestaurantsInfo'
 
 
 
