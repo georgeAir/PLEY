@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
+import NewForm from './NewForm'
 
 let baseUrl = 'http://localhost:3003'
 
@@ -40,6 +41,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Restaurants! Celebrate! </h1>
+        <NewForm />
         <table>
           <tbody>
             { this.state.restaurants.map((restaurant, i) => {
