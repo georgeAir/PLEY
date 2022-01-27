@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      baseURL: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=chicago",
+      baseURL: "https://api.yelp.com/v3/businesses/search?location=chicago",
       apiKey: "ue2_GLAE9FpEp0NX5hhSw_6qzFoN-MlrnL1Sm7BJUnuixUy4u3MnLp_FqUxqpbyMTzqkqLujFbQRfOgFZUP19cxZo5da-uDeU3OnQJ1KhmPZg1LZssAXl494sszyYXYx",
       restaurants: [],
       typeOfRestaurant: "",
@@ -107,10 +107,10 @@ this.setState({
 //         console.log(resJson);
 //     })
 //   }
-
-    getRestaurants = (term) => {
+    getRestaurants = () => {
+    const term = 'asian'
     const searchURL = baseURL + '/yelp/' + term
-    fetch('http://localhost:3003/yelp/')
+    fetch(searchURL)
       .then(res => res.json())
       .then(json => console.log(json));
   }
@@ -135,11 +135,11 @@ this.setState({
         <h1>Restaurants! Celebrate! </h1>
 
 
-        <button onClick={getRestaurants}> Submit for restaurants</button>
+        <button onClick={this.getRestaurants}> Submit for restaurants</button>
 
 
         <form onSubmit= {this.handleSubmit}>
-          
+
           <label> Type of restaurant </label>
           <input
             id="typeOfRestaurant"
@@ -155,7 +155,7 @@ this.setState({
         <NewForm />
         <table>
           <tbody>
-            
+
           </tbody>
         </table>
 
