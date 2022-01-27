@@ -7,7 +7,7 @@ import RestaurantInfo from './RestaurantsInfo'
 
 
 
-let baseUrl = 'http://localhost:3003'
+const baseURL = 'http://localhost:3003'
 
 class App extends Component {
   constructor(props) {
@@ -31,14 +31,16 @@ class App extends Component {
 
   loginUser = (event) => {
   event.preventDefault()
-  fetch(baseUrl + '/users/login',{
+  fetch(baseURL + '/users/login',{
     method: 'POST',
     body: JSON.stringify({
       username: event.target.username.value,
       password: event.target.password.value
     }),
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.state.apiKey
+
     },
     credentials: 'include'
   }).then(res => res.json())
@@ -50,7 +52,7 @@ class App extends Component {
 
 register = (event) => {
   event.preventDefault()
-  fetch(baseUrl + '/users/signup',{
+  fetch(baseURL + '/users/signup',{
     method: 'POST',
     body:JSON.stringify({
       username: event.target.username.value,
@@ -68,22 +70,7 @@ register = (event) => {
   })
 }
 
-  getRestaurants = () => {
-    // fetch to the backend
-    fetch(baseUrl + '/restaurants' , {
-      credentials: 'include'
-    })
-    .then(res => {
-      if(res.status === 200) {
-        return res.json()
-      } else {
-        return []
-      }
-    }).then(data => {
-      // console.log(data)
-      this.setState({ restaurants: data })
-    })
-  }
+
 
   showEditForm = (restaurant) => {
   console.log(restaurant);
@@ -104,39 +91,54 @@ this.setState({
 })
 }
 
-handleSubmit = (event) => {
-  event.preventDefault()
-  // set state using baseURL, apiKey, query, movieTitle
-  // saving this in state to searchURL
-  this.setState({
-    searchURL: this.state.baseURL + this.state.query + this.state.typeOfRestaurant + this.state.query1+ this.state.type
-  }, () => {
-    // fetch request will go here
-    fetch(this.state.searchURL)
-    .then(response => {
-      return response.json()
-    }).then(json => this.setState({
+// handleSumbit = (event) => {
+//     event.preventDefault()
+//
+//     fetch(this.state.baseURL + this.state.query + this.state.typeOfRestaurant + this.state.query1+ this.state.type{
+//       method: 'GET',
+//       body: JSON.stringify({
+//         // name: event.target.name.value,
+//         // description: event.target.description.value
+//       }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer ' + this.state.apiKey
+//       },
+//       credentials: 'include'
+//     }).then(res => res.json())
+//     .then(resJson => {
+//         console.log(resJson);
+//     })
+//   }
 
-    }), (error) => console.log(error))
-  })
-}
+    getRestaurants = (term) => {
+    const searchURL = baseURL + '/yelp/' + term
+    fetch('http://localhost:3003/yelp/')
+      .then(res => res.json())
+      .then(json => console.log(json));
+  }
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
   componentDidMount() {
-    this.getRestaurants()
+    // this.getRestaurants()
   }
 
   render() {
     console.log(this.state);
     return (
+
+
+
       <div className="App">
         <Nav
         loginUser={this.loginUser}
         register={this.register}
         />
         <h1>Restaurants! Celebrate! </h1>
+
+        <button onClick={getRestaurants}> Submit for restaurants</button>
 
 
         <form onSubmit= {this.handleSubmit}>
