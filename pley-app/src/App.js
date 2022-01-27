@@ -38,7 +38,7 @@ class App extends Component {
   }).then(res => res.json())
   .then(resJson => {
     console.log(resJson)
-    this.getHolidays()
+    this.getRestaurants()
   })
 }
 
@@ -122,7 +122,7 @@ register = (event) => {
 
         {
           this.state.modalOpen &&
-          <form onSubmit= {this.handleSumbit}>
+          <form onSubmit= {this.handleSubmit}>
             <label>Name: </label>
             <input name='name' value={this.state.name} onChange={this.handleChange}/> <br/>
 
