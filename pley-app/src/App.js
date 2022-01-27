@@ -14,6 +14,7 @@ class App extends Component {
     super(props)
 
     this.state = {
+      baseUrl: '',
       restaurants: [],
       description: '',
       modalOpen: false,
@@ -21,6 +22,45 @@ class App extends Component {
     // if you do not use an arrow function for getRestaurants()
    // this.getRestaurants = this.getRestaurants.bind(this)
   }
+
+  loginUser = (event) => {
+  event.preventDefault()
+  fetch(baseUrl + '/users/login',{
+    method: 'POST',
+    body: JSON.stringify({
+      username: event.target.username.value,
+      password: event.target.password.value
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include'
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    this.getHolidays()
+  })
+}
+
+register = (event) => {
+  event.preventDefault()
+  fetch(baseUrl + '/users/signup',{
+    method: 'POST',
+    body:JSON.stringify({
+      username: event.target.username.value,
+      password: event.target.password.value,
+    }),
+    headers:{
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer ' + key ////
+
+    }
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    // call getHolidays TO GET ALL THE HOLIDAYS AND REFRESH PAGE
+  })
+}
 
   getRestaurants = () => {
     // fetch to the backend
@@ -59,7 +99,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Nav />
+        <Nav
+        loginUser={this.loginUser}
+        register={this.register}
+        />
         <h1>Restaurants! Celebrate! </h1>
         <NewForm />
         <table>
