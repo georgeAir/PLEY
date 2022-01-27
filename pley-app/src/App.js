@@ -14,10 +14,16 @@ class App extends Component {
     super(props)
 
     this.state = {
-      baseUrl: '',
+      baseURL: 'https://api.yelp.com/v3/businesses/search?location=chicago',
+      apiKey:`appid=${process.env.REACT_APP_API_KEY}`,
       restaurants: [],
-      description: '',
+      typeOfRestaurant: '',
       modalOpen: false,
+      searchURL: '',
+      query: '&term=',
+      query1: '+',
+      type:'restaurants'
+
     }
     // if you do not use an arrow function for getRestaurants()
    // this.getRestaurants = this.getRestaurants.bind(this)
@@ -38,7 +44,7 @@ class App extends Component {
   }).then(res => res.json())
   .then(resJson => {
     console.log(resJson)
-    this.getHolidays()
+    this.getRestaurants()
   })
 }
 
@@ -52,7 +58,7 @@ register = (event) => {
     }),
     headers:{
       'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + key ////
+      'Authorization': 'Bearer ' + this.state.apiKey
 
     }
   }).then(res => res.json())
@@ -89,6 +95,32 @@ register = (event) => {
   })
 }
 
+handleChange = (event) => {
+// console.log(event.target.id);
+// console.log(event.target.value);
+// this.setState({movieTitle: event.target.id})
+this.setState({
+  [event.target.id]:event.target.value
+})
+}
+
+handleSubmit = (event) => {
+  event.preventDefault()
+  // set state using baseURL, apiKey, query, movieTitle
+  // saving this in state to searchURL
+  this.setState({
+    searchURL: this.state.baseURL + this.state.query + this.state.typeOfRestaurant + this.state.query1+ this.state.type
+  }, () => {
+    // fetch request will go here
+    fetch(this.state.searchURL)
+    .then(response => {
+      return response.json()
+    }).then(json => this.setState({
+
+    }), (error) => console.log(error))
+  })
+}
+
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
@@ -97,6 +129,7 @@ register = (event) => {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <Nav
@@ -104,6 +137,24 @@ register = (event) => {
         register={this.register}
         />
         <h1>Restaurants! Celebrate! </h1>
+
+
+        <form onSubmit= {this.handleSubmit}>
+          <label> Type of restaurant </label>
+          <input
+            id='typeOfRestaurant'
+            type='text'
+            placeholder='Enter type of restaurant'
+            value={this.state.typeOfRestaurant}
+            onChange={this.handleChange}
+          />
+
+          <input
+            type='submit'
+            value='Find Restaurants'
+          />
+        </form>
+
         <NewForm />
         <table>
           <tbody>
