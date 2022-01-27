@@ -4,7 +4,8 @@ import NewForm from "./NewForm";
 import Nav from "./Nav";
 import RestaurantInfo from "./RestaurantsInfo";
 
-let baseUrl = "http://localhost:3003";
+
+const baseURL = 'http://localhost:3003'
 
 class App extends Component {
   constructor(props) {
@@ -26,132 +27,119 @@ class App extends Component {
   }
 
   loginUser = (event) => {
-    event.preventDefault();
-    fetch(baseUrl + "/users/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username: event.target.username.value,
-        password: event.target.password.value,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((resJson) => {
-        console.log(resJson);
-        // this.getRestaurants();
-      });
-  };
+  event.preventDefault()
+  fetch(baseURL + '/users/login',{
+    method: 'POST',
+    body: JSON.stringify({
+      username: event.target.username.value,
+      password: event.target.password.value
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.state.apiKey
 
-  register = (event) => {
-    event.preventDefault();
-    fetch(baseUrl + "/users/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        username: event.target.username.value,
-        password: event.target.password.value,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.state.apiKey,
-      },
-    })
-      .then((res) => res.json())
-      .then((resJson) => {
-        console.log(resJson);
-        // call getHolidays TO GET ALL THE HOLIDAYS AND REFRESH PAGE
-      });
-  };
+    },
+    credentials: 'include'
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    this.getRestaurants()
+  })
+}
 
-  // getRestaurants = () => {
-  //   // fetch to the backend
-  //   fetch(baseUrl + "/restaurants", {})
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         return res.json();
-  //       } else {
-  //         return [];
-  //       }
-  //     })
-  //     .then((data) => {
-  //       // console.log(data)
-  //       this.setState({ restaurants: data });
-  //     });
-  // };
+register = (event) => {
+  event.preventDefault()
+  fetch(baseURL + '/users/signup',{
+    method: 'POST',
+    body:JSON.stringify({
+      username: event.target.username.value,
+      password: event.target.password.value,
+    }),
+    headers:{
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.state.apiKey
+
+    }
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    // call getHolidays TO GET ALL THE HOLIDAYS AND REFRESH PAGE
+  })
+}
+
+
 
   showEditForm = (restaurant) => {
-    console.log(restaurant);
-    this.setState({
-      modalOpen: true,
-      name: restaurant.name,
-      description: restaurant.description,
-      holidayToBeEdited: restaurant,
-    });
-  };
+  console.log(restaurant);
+  this.setState({
+    modalOpen: true,
+    name: restaurant.name,
+    description: restaurant.description,
+    holidayToBeEdited: restaurant,
+  })
+}
 
-  handleChange = (event) => {
-    // console.log(event.target.id);
-    // console.log(event.target.value);
-    // this.setState({movieTitle: event.target.id})
-    this.setState({
-      [event.target.id]: event.target.value,
-    });
-  };
+handleChange = (event) => {
+// console.log(event.target.id);
+// console.log(event.target.value);
+// this.setState({movieTitle: event.target.id})
+this.setState({
+  [event.target.id]:event.target.value
+})
+}
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    // set state using baseURL, apiKey, query, movieTitle
-    // saving this in state to searchURL
-    this.setState(
-      {
-        searchURL:
-          this.state.baseURL +
-          this.state.query +
-          this.state.typeOfRestaurant +
-          this.state.query1 +
-          this.state.type,
-      },
-      () => {
-        //Authorization Headers will go here
-        const headers = {
-          headers: { 'Authorization': `Bearer ${this.state.apiKey}`}
-        }
-        console.log(this.state.searchURL)
-        console.log(headers)
-        // fetch request will go here
-        fetch(this.state.searchURL, headers)
-          .then((response) => {
-            return response.json();
-          })
-          .then(
-            (json) =>
-            console.log(json)
-              // this.setState({
-              //   restaurants: json,
-              // }),
-            // (error) => console.log(error)
-          );
-      }
-    );
-  };
+// handleSumbit = (event) => {
+//     event.preventDefault()
+//
+//     fetch(this.state.baseURL + this.state.query + this.state.typeOfRestaurant + this.state.query1+ this.state.type{
+//       method: 'GET',
+//       body: JSON.stringify({
+//         // name: event.target.name.value,
+//         // description: event.target.description.value
+//       }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer ' + this.state.apiKey
+//       },
+//       credentials: 'include'
+//     }).then(res => res.json())
+//     .then(resJson => {
+//         console.log(resJson);
+//     })
+//   }
+
+    getRestaurants = (term) => {
+    const searchURL = baseURL + '/yelp/' + term
+    fetch('http://localhost:3003/yelp/')
+      .then(res => res.json())
+      .then(json => console.log(json));
+  }
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
-  // componentDidMount() {
-  //   this.getRestaurants();
-  // }
+
+  componentDidMount() {
+    // this.getRestaurants()
+  }
+
 
   render() {
     console.log(this.state);
     return (
+
+
+
       <div className="App">
         <Nav loginUser={this.loginUser} register={this.register} />
         <h1>Restaurants! Celebrate! </h1>
 
-        <form onSubmit={this.handleSubmit}>
+
+        <button onClick={getRestaurants}> Submit for restaurants</button>
+
+
+        <form onSubmit= {this.handleSubmit}>
+          
           <label> Type of restaurant </label>
           <input
             id="typeOfRestaurant"
