@@ -9,7 +9,6 @@ export default class NewForm extends Component {
       cuisineType: '',
       location: '',
       description: '',
-      likes: '',
     }
   }
 
