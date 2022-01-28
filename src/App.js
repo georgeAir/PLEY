@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import BarsInfo from "./BarsInfo";
 
 
-const baseURL = 'http://localhost:3003'
+const baseURL = process.env.baseURL
 
 class App extends Component {
   constructor(props) {
