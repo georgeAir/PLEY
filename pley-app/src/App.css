@@ -1,3 +1,8 @@
+body{
+  background-image: url(https://images.unsplash.com/photo-1568685002130-f55183852304?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80);
+  background-size: cover;
+}
+
 .App {
   text-align: center;
 }
@@ -41,6 +46,9 @@
   display:flex;
 }
 
+.nav{
+  background-color: black;
+}
 
 
 .foodList{
@@ -52,9 +60,37 @@ overflow: scroll;
 justify-content: space-between;
 align-items: flex-end;
 align-content: space-between;
+
 }
 
 .foodCard{
   margin: 5px;
   background-color: orange;
+  height: 18rem;
+  width: 15rem;
+  font-size: xx-small;
+}
+
+img.card-img-top{
+  height: 8rem;
+  width: 10rem;
+}
+.foodDiv{
+  margin-top: 20px;
+  height: 18rem;
+  width: 3400px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-content: space-between;
+}
+
+.restaurantName{
+  font-style: bold;
+  font-weight: bolder;
+  font-size: 1.5em
 }

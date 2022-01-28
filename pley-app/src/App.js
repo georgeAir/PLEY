@@ -139,13 +139,14 @@ this.setState({
           <input type="submit" value="Find Restaurants" />
         </form>
   <section className="foodList">
+    <div className= "foodDiv">
         { this.state.restaurants.map((restaurant, i) => {
             return (
 
               <Card className="foodCard" style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={restaurant.image_url} style={{ maxWidth: '12rem' }}/>
+              <Card.Img variant="top" src={restaurant.image_url} style={{ width: '10rem' }}/>
               <Card.Body>
-                <Card.Title>{restaurant.name}</Card.Title>
+                <Card.Title className="restaurantName" >{restaurant.name}</Card.Title>
                 <Card.Text>
                   Price: {restaurant.price}
                 </Card.Text>
@@ -165,6 +166,7 @@ this.setState({
             )
           })
         }
+    </div>
   </section>
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
