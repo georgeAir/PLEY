@@ -16,7 +16,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      baseURL: "https://api.yelp.com/v3/businesses/search?location=chicago",
+      baseURL: "http://localhost:3003",
       apiKey: "ue2_GLAE9FpEp0NX5hhSw_6qzFoN-MlrnL1Sm7BJUnuixUy4u3MnLp_FqUxqpbyMTzqkqLujFbQRfOgFZUP19cxZo5da-uDeU3OnQJ1KhmPZg1LZssAXl494sszyYXYx",
       restaurants: [],
       typeOfRestaurant: "",
@@ -24,7 +24,7 @@ class App extends Component {
       searchURL: "",
       query: "&term=",
       query1: "+",
-      type: "restaurants",
+      userTerm: "",
     };
     // if you do not use an arrow function for getRestaurants()
     // this.getRestaurants = this.getRestaurants.bind(this)
@@ -84,17 +84,35 @@ register = (event) => {
 }
 
 handleChange = (event) => {
-// console.log(event.target.id);
-// console.log(event.target.value);
-// this.setState({movieTitle: event.target.id})
-this.setState({
-  [event.target.id]:event.target.value
-})
+  // console.log(event.target.id);
+  // console.log(event.target.value);
+  // this.setState({movieTitle: event.target.id})
+  this.setState({
+    [event.target.id]:event.target.value
+  })
 }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    // set state using baseURL, apiKey, query, movieTitle
+    // saving this in state to searchURL
+    this.setState({
+      searchURL: this.state.baseURL + '/yelp/' + this.state.userTerm
+    }, () => {
+      // fetch request will go here
+      fetch(this.state.searchURL)
+      .then(response => {
+        return response.json()
+      }).then(json => this.setState({
+        restaurants: json
+
+      }), (error) => console.log(error))
+    })
+  }
 
 
     getRestaurants = () => {
-    const term = 'asian'
+    const term = 'bars'
     const searchURL = baseURL + '/yelp/' + term
     fetch(searchURL)
       .then(res => res.json())
@@ -104,12 +122,22 @@ this.setState({
   }
 
 
+  getInitialRestaurants = () => {
+  const searchURL = baseURL + '/yelp/'
+  fetch(searchURL)
+    .then(res => res.json())
+    .then(json => this.setState({
+      restaurants: json
+    }));
+}
+
+
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 
   componentDidMount() {
-    this.getRestaurants()
+    this.getInitialRestaurants()
   }
 
 
@@ -122,7 +150,7 @@ this.setState({
         <h1>Restaurants! Celebrate! </h1>
 
 
-        <button onClick={this.getRestaurants}> Submit for restaurants</button>
+        // <button onClick={this.getRestaurants}> Submit for restaurants</button>
 
 
         <form onSubmit= {this.handleSubmit}>
@@ -136,7 +164,7 @@ this.setState({
             onChange={this.handleChange}
           />
 
-          <input type="submit" value="Find Restaurants" />
+          <input type="submit" value="Find Restaurants"/>
         </form>
   <section className="foodList">
     <div className= "foodDiv">
