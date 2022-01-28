@@ -63,6 +63,7 @@ body{
   height: 18rem;
   width: 15rem;
   font-size: xx-small;
+
 }
 
 img.card-img-top{
@@ -80,7 +81,7 @@ img.card-img-top{
 
 .barCard{
   margin: 5px;
-  background-color: white;
+  background-color: orange;
   height: 18rem;
   width: 15rem;
   font-size: xx-small;
@@ -96,15 +97,20 @@ nav{
     font-size: xx-large;
 }
 
-.card {
+.foodCard {
     position: relative;
     display: flex;
     flex-direction: column;
-
-    background-color: #dd7d1bd1;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #orange;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0.25rem;
+}
+
+.card{
+  background-color: orange;
 }
 
 .foodDiv {
@@ -119,4 +125,8 @@ nav{
     justify-content: space-between;
     align-items: flex-end;
     align-content: space-between;
+}
+.dropdown{
+  display: inline;
+  position: static;
 }
