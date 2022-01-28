@@ -52,8 +52,8 @@ body{
 
 
 .foodList {
-    overflow: scroll;
-  background-color: #ffa50024
+  overflow: scroll;
+  margin: 1.5rem;
 }
 
 
@@ -100,9 +100,7 @@ nav{
     position: relative;
     display: flex;
     flex-direction: column;
-    /* min-width: 0; */
-    /* margin: 5rem; */
-    /* word-wrap: break-word; */
+
     background-color: #dd7d1bd1;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);

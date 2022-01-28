@@ -10,9 +10,9 @@ export default function Nav(props) {
    <>
 
    <Navbar>
-  <Container>
+
     <Navbar.Brand className="pley">PLEY</Navbar.Brand>
-    <NavDropdown title="Account" id="nav-dropdown">
+    <NavDropdown className="dropdown" title="Account" id="nav-dropdown">
         <b>User Login:</b> <form onSubmit={props.loginUser}>
             <label htmlFor="name">Username: </label>
             <input type="text" id="name" name="username"/>
@@ -35,7 +35,7 @@ export default function Nav(props) {
         Signed in as: <a href="#login"></a>
       </Navbar.Text>
     </Navbar.Collapse>
-  </Container>
+
 </Navbar>
 </>
 
