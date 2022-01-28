@@ -6,6 +6,7 @@ import RestaurantInfo from "./RestaurantsInfo";
 import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import BarsInfo from "./BarsInfo";
 
 
 const baseURL = 'http://localhost:3003'
@@ -102,24 +103,6 @@ this.setState({
       }));
   }
 
-  addLike = (restaurant) => {
-// console.log(holiday)
-const term = 'asian'
-const searchURL = baseURL + '/yelp/' + term
-fetch(searchURL + '/addlikes/' + restaurant._id, {
-  method: 'PATCH',
-  credentials: 'include'
-}).then(res => res.json())
-.then(resJson => {
-  // console.log(resJson)
-  const copyRestaurants = [...this.state.restaurants]
-  const findIndex = this.state.restaurants.findIndex( holiday => holiday._id === resJson.data._id)
-  copyRestaurants[findIndex].likes = resJson.data.likes
-  this.setState({
-    restaurants: copyRestaurants
-  })
-})
-}
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
@@ -156,7 +139,6 @@ fetch(searchURL + '/addlikes/' + restaurant._id, {
           <input type="submit" value="Find Restaurants" />
         </form>
 
-
         { this.state.restaurants.map((restaurant, i) => {
             return (
               <Card style={{ width: '18rem' }}>
@@ -181,7 +163,6 @@ fetch(searchURL + '/addlikes/' + restaurant._id, {
             )
           })
         }
-
 
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
