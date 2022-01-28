@@ -94,3 +94,11 @@ img.card-img-top{
   font-weight: bolder;
   font-size: 1.5em
 }
+
+.barCard{
+  margin: 5px;
+  background-color: white;
+  height: 18rem;
+  width: 15rem;
+  font-size: xx-small;
+}
