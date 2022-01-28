@@ -138,10 +138,11 @@ this.setState({
 
           <input type="submit" value="Find Restaurants" />
         </form>
-
+  <section className="foodList">
         { this.state.restaurants.map((restaurant, i) => {
             return (
-              <Card style={{ width: '18rem' }}>
+
+              <Card className="foodCard" style={{ width: '18rem' }}>
               <Card.Img variant="top" src={restaurant.image_url} style={{ maxWidth: '12rem' }}/>
               <Card.Body>
                 <Card.Title>{restaurant.name}</Card.Title>
@@ -160,10 +161,11 @@ this.setState({
                 <Button variant="primary">Go to Website</Button>
               </Card.Body>
             </Card>
+
             )
           })
         }
-
+  </section>
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
             <label>Name: </label>

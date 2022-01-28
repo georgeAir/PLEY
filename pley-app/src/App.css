@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.menu{
+  display:flex;
+}
+
+
+
+.foodList{
+overflow: scroll;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+overflow: scroll;
+justify-content: space-between;
+align-items: flex-end;
+align-content: space-between;
+}
+
+.foodCard{
+  margin: 5px;
+  background-color: orange;
+}
