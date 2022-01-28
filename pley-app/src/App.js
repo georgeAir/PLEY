@@ -88,47 +88,48 @@ this.setState({
 })
 }
 
-// handleSumbit = (event) => {
-//     event.preventDefault()
-//
-//     fetch(this.state.baseURL + this.state.query + this.state.typeOfRestaurant + this.state.query1+ this.state.type{
-//       method: 'GET',
-//       body: JSON.stringify({
-//         // name: event.target.name.value,
-//         // description: event.target.description.value
-//       }),
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': 'Bearer ' + this.state.apiKey
-//       },
-//       credentials: 'include'
-//     }).then(res => res.json())
-//     .then(resJson => {
-//         console.log(resJson);
-//     })
-//   }
+
     getRestaurants = () => {
     const term = 'asian'
     const searchURL = baseURL + '/yelp/' + term
     fetch(searchURL)
       .then(res => res.json())
-      .then(json => console.log(json));
+      .then(json => this.setState({
+        restaurants: json
+      }));
   }
+
+  addLike = (restaurant) => {
+// console.log(holiday)
+const term = 'asian'
+const searchURL = baseURL + '/yelp/' + term
+fetch(searchURL + '/addlikes/' + restaurant._id, {
+  method: 'PATCH',
+  credentials: 'include'
+}).then(res => res.json())
+.then(resJson => {
+  // console.log(resJson)
+  const copyRestaurants = [...this.state.restaurants]
+  const findIndex = this.state.restaurants.findIndex( holiday => holiday._id === resJson.data._id)
+  copyRestaurants[findIndex].likes = resJson.data.likes
+  this.setState({
+    restaurants: copyRestaurants
+  })
+})
+}
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 
   componentDidMount() {
-    // this.getRestaurants()
+    this.getRestaurants()
   }
 
 
   render() {
     console.log(this.state);
     return (
-
-
 
       <div className="App">
         <Nav loginUser={this.loginUser} register={this.register} />
@@ -152,10 +153,25 @@ this.setState({
           <input type="submit" value="Find Restaurants" />
         </form>
 
-        <NewForm />
+
         <table>
           <tbody>
-
+          { this.state.restaurants.map((restaurant, i) => {
+              return (
+                <tr key={restaurant._id}>
+                  <td onDoubleClick={() => this.toggleCelebrated(restaurant)}
+                  className={ restaurant.celebrated ? 'celebrated' : null}>
+                  {restaurant.name}
+                  </td>
+                  <td> {restaurant.price} </td>
+                  <td> {restaurant.rating} </td>
+                  <td> {restaurant.phone} </td>
+                  <td onClick= {() => this.showEditForm(restaurant)}> </td>
+                  <td onClick={() => this.deleteHoliday(restaurant._id)}>Delete:❌</td>
+                </tr>
+              )
+            })
+          }
           </tbody>
         </table>
 
