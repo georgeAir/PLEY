@@ -19,7 +19,6 @@ class App extends Component {
       baseURL: "http://localhost:3003",
       apiKey: "ue2_GLAE9FpEp0NX5hhSw_6qzFoN-MlrnL1Sm7BJUnuixUy4u3MnLp_FqUxqpbyMTzqkqLujFbQRfOgFZUP19cxZo5da-uDeU3OnQJ1KhmPZg1LZssAXl494sszyYXYx",
       restaurants: [],
-      typeOfRestaurant: "",
       modalOpen: false,
       searchURL: "",
       query: "&term=",
@@ -157,14 +156,14 @@ handleChange = (event) => {
 
           <label> Type of restaurant </label>
           <input
-            id="typeOfRestaurant"
+            id="userTerm"
             type="text"
             placeholder="Enter type of restaurant"
-            value={this.state.typeOfRestaurant}
+            value={this.state.userTerm}
             onChange={this.handleChange}
           />
 
-          <input type="submit" value="Find Restaurants"/>
+          <input type="submit" value="Find Restaurants" onClick={this.handleSubmit}/>
         </form>
   <section className="foodList">
     <div className= "foodDiv">
