@@ -9,7 +9,8 @@ export default function Nav(props) {
        <input type="password" id="password" name="password"/>
        <input type="submit" value="login" />
      </form>
-     OR
+     <br></br>
+     
      <form onSubmit={props.register}>
        <label htmlFor="name">Username: </label>
        <input type="text" id="name" name="username"/>

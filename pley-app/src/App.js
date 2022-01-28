@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import NewForm from "./NewForm";
 import Nav from "./Nav";
 import RestaurantInfo from "./RestaurantsInfo";
+import BarsInfo from "./BarsInfo";
 
 
 const baseURL = 'http://localhost:3003'
@@ -99,24 +100,6 @@ this.setState({
       }));
   }
 
-  addLike = (restaurant) => {
-// console.log(holiday)
-const term = 'asian'
-const searchURL = baseURL + '/yelp/' + term
-fetch(searchURL + '/addlikes/' + restaurant._id, {
-  method: 'PATCH',
-  credentials: 'include'
-}).then(res => res.json())
-.then(resJson => {
-  // console.log(resJson)
-  const copyRestaurants = [...this.state.restaurants]
-  const findIndex = this.state.restaurants.findIndex( holiday => holiday._id === resJson.data._id)
-  copyRestaurants[findIndex].likes = resJson.data.likes
-  this.setState({
-    restaurants: copyRestaurants
-  })
-})
-}
 
   // Component lifecycle flowchart
   // https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
@@ -161,19 +144,39 @@ fetch(searchURL + '/addlikes/' + restaurant._id, {
                 <tr key={restaurant._id}>
                   <td onDoubleClick={() => this.toggleCelebrated(restaurant)}
                   className={ restaurant.celebrated ? 'celebrated' : null}>
-                  {restaurant.name}
+                  Name: {restaurant.name}
                   </td>
-                  <td> {restaurant.price} </td>
-                  <td> {restaurant.rating} </td>
-                  <td> {restaurant.phone} </td>
+                  <td> Price:{restaurant.price} </td>
+                  <td> Rating: {restaurant.rating} </td>
+                  <td> Phone: {restaurant.phone} </td>
                   <td onClick= {() => this.showEditForm(restaurant)}> </td>
-                  <td onClick={() => this.deleteHoliday(restaurant._id)}>Delete:❌</td>
                 </tr>
               )
             })
           }
           </tbody>
         </table>
+
+        {/* <table>
+          <tbody>
+          { this.state.bars.map((bar, i) => {
+              return (
+                <tr key={bar._id}>
+                  <td onDoubleClick={() => this.toggleCelebrated(bar)}
+                  className={ bar.celebrated ? 'celebrated' : null}>
+                  {bar.name}
+                  </td>
+                  <td> {bar.price} </td>
+                  <td> {bar.rating} </td>
+                  <td> {bar.phone} </td>
+                  <td onClick= {() => this.showEditForm(bar)}> </td>
+
+                </tr>
+              )
+            })
+          }
+          </tbody>
+        </table> */}
 
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
