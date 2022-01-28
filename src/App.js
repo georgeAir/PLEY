@@ -17,13 +17,16 @@ class App extends Component {
 
     this.state = {
       baseURL: "http://localhost:3003",
+      barsURL: "https://api.yelp.com/v3/businesses/search?location=chicago",
       apiKey: "ue2_GLAE9FpEp0NX5hhSw_6qzFoN-MlrnL1Sm7BJUnuixUy4u3MnLp_FqUxqpbyMTzqkqLujFbQRfOgFZUP19cxZo5da-uDeU3OnQJ1KhmPZg1LZssAXl494sszyYXYx",
       restaurants: [],
+      bars: [],
       modalOpen: false,
       searchURL: "",
       query: "&term=",
       query1: "+",
       userTerm: "",
+      userBar: "",
     };
     // if you do not use an arrow function for getRestaurants()
     // this.getRestaurants = this.getRestaurants.bind(this)
@@ -82,14 +85,12 @@ register = (event) => {
   })
 }
 
-handleChange = (event) => {
-  // console.log(event.target.id);
-  // console.log(event.target.value);
-  // this.setState({movieTitle: event.target.id})
-  this.setState({
-    [event.target.id]:event.target.value
-  })
-}
+  handleChange = (event) => {
+
+    this.setState({
+      [event.target.id]:event.target.value
+    })
+  }
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -109,14 +110,32 @@ handleChange = (event) => {
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    // set state using baseURL, apiKey, query, movieTitle
+    // saving this in state to searchURL
+    this.setState({
+      searchURL: this.state.baseURL + '/yelp/' + this.state.userBar
+    }, () => {
+      // fetch request will go here
+      fetch(this.state.searchURL)
+      .then(response => {
+        return response.json()
+      }).then(json => this.setState({
+        bars: json
 
-    getRestaurants = () => {
-    const term = 'bars'
+      }), (error) => console.log(error))
+    })
+  }
+
+
+    getInitialBars = () => {
+    const term = 'bar'
     const searchURL = baseURL + '/yelp/' + term
     fetch(searchURL)
       .then(res => res.json())
       .then(json => this.setState({
-        restaurants: json
+        bars: json
       }));
   }
 
@@ -128,7 +147,7 @@ handleChange = (event) => {
     .then(json => this.setState({
       restaurants: json
     }));
-}
+  }
 
 
   // Component lifecycle flowchart
@@ -137,6 +156,7 @@ handleChange = (event) => {
 
   componentDidMount() {
     this.getInitialRestaurants()
+    this.getInitialBars()
   }
 
 
@@ -146,11 +166,7 @@ handleChange = (event) => {
 
       <div className="App">
         <Nav loginUser={this.loginUser} register={this.register} />
-        <h1>Restaurants! Celebrate! </h1>
-
-
-        // <button onClick={this.getRestaurants}> Submit for restaurants</button>
-
+        <h1>Restaurants!</h1>
 
         <form onSubmit= {this.handleSubmit}>
 
@@ -165,36 +181,82 @@ handleChange = (event) => {
 
           <input type="submit" value="Find Restaurants" onClick={this.handleSubmit}/>
         </form>
-  <section className="foodList">
-    <div className= "foodDiv">
-        { this.state.restaurants.map((restaurant, i) => {
-            return (
+    <section className="foodList">
+      <div className= "foodDiv">
+      { this.state.restaurants.map((restaurant, i) => {
+          return (
 
-              <Card className="foodCard" style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={restaurant.image_url} style={{ width: '10rem' }}/>
-              <Card.Body>
-                <Card.Title className="restaurantName" >{restaurant.name}</Card.Title>
-                <Card.Text>
-                  Price: {restaurant.price}
-                </Card.Text>
-                <Card.Text>
-                  Rating: {restaurant.rating}
-                </Card.Text>
-                <Card.Text>
-                  Phone Number: {restaurant.phone}
-                </Card.Text>
-                <Card.Text>
-                  {restaurant.location.display_address}
-                </Card.Text>
-                <Button variant="primary">Go to Website</Button>
-              </Card.Body>
-            </Card>
+            <Card className="foodCard" style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={restaurant.image_url} style={{ width: '10rem' }}/>
+            <Card.Body>
+              <Card.Title className="restaurantName" >{restaurant.name}</Card.Title>
+              <Card.Text>
+                Price: {restaurant.price}
+              </Card.Text>
+              <Card.Text>
+                Rating: {restaurant.rating}
+              </Card.Text>
+              <Card.Text>
+                Phone Number: {restaurant.phone}
+              </Card.Text>
+              <Card.Text>
+                {restaurant.location.display_address}
+              </Card.Text>
+              <Button variant="primary">Go to Website</Button>
+            </Card.Body>
+          </Card>
 
-            )
-          })
-        }
-    </div>
-  </section>
+          )
+        })
+      }
+      </div>
+      </section>
+
+
+      <h1>Bars!</h1>
+
+      <form onSubmit= {this.handleSubmit}>
+        <label> Type of Bar </label>
+        <input
+          id="userBar"
+          type="text"
+          placeholder="Enter type of bar"
+          value={this.state.userBar}
+          onChange={this.handleChange}
+        />
+
+        <input type="submit" value="Find Restaurants" onClick={this.handleSubmit}/>
+      </form>
+      <section className="foodList">
+      <div className= "foodDiv">
+      { this.state.bars.map((bar, i) => {
+          return (
+
+            <Card className="barCard" style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={bar.image_url} style={{ width: '10rem' }}/>
+            <Card.Body>
+              <Card.Title className="restaurantName" >{bar.name}</Card.Title>
+              <Card.Text>
+                Price: {bar.price}
+              </Card.Text>
+              <Card.Text>
+                Rating: {bar.rating}
+              </Card.Text>
+              <Card.Text>
+                Phone Number: {bar.phone}
+              </Card.Text>
+              <Card.Text>
+                {bar.location.display_address}
+              </Card.Text>
+              <Button variant="primary">Go to Website</Button>
+            </Card.Body>
+          </Card>
+
+          )
+        })
+      }
+      </div>
+    </section>
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
             <label>Name: </label>
