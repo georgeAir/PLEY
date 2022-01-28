@@ -34,7 +34,7 @@ class App extends Component {
 
   loginUser = (event) => {
   event.preventDefault()
-  fetch(baseURL + '/users/login',{
+  fetch(this.state.baseURL + '/users/login',{
     method: 'POST',
     body: JSON.stringify({
       username: event.target.username.value,
@@ -49,13 +49,14 @@ class App extends Component {
   }).then(res => res.json())
   .then(resJson => {
     console.log(resJson)
-    this.getRestaurants()
+    this.getInitialBars()
+    this.getInitialRestaurants()
   })
 }
 
 register = (event) => {
   event.preventDefault()
-  fetch(baseURL + '/users/signup',{
+  fetch(this.state.baseURL + '/users/signup',{
     method: 'POST',
     body:JSON.stringify({
       username: event.target.username.value,
@@ -110,7 +111,7 @@ register = (event) => {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmitBar = (event) => {
     event.preventDefault()
     // set state using baseURL, apiKey, query, movieTitle
     // saving this in state to searchURL
@@ -225,7 +226,7 @@ register = (event) => {
           onChange={this.handleChange}
         />
 
-        <input type="submit" value="Find Restaurants" onClick={this.handleSubmit}/>
+        <input type="submit" value="Find Restaurants" onClick={this.handleSubmitBar}/>
       </form>
       <section className="foodList">
       <div className= "foodDiv">

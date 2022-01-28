@@ -51,17 +51,11 @@ body{
 }
 
 
-.foodList{
-overflow: scroll;
-display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-overflow: scroll;
-justify-content: space-between;
-align-items: flex-end;
-align-content: space-between;
-
+.foodList {
+    overflow: scroll;
+  background-color: #ffa50024
 }
+
 
 .foodCard{
   margin: 5px;
@@ -75,19 +69,8 @@ img.card-img-top{
   height: 8rem;
   width: 10rem;
 }
-.foodDiv{
-  margin-top: 20px;
-  height: 18rem;
-  width: 3400px;
-  overflow: scroll;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  overflow: scroll;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-content: space-between;
-}
+
+
 
 .restaurantName{
   font-style: bold;
@@ -101,4 +84,41 @@ img.card-img-top{
   height: 18rem;
   width: 15rem;
   font-size: xx-small;
+}
+
+nav{
+  background-color: #d77e33cf;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(237 154 0 / 78%);
+    font-weight: 700;
+    font-size: xx-large;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* min-width: 0; */
+    /* margin: 5rem; */
+    /* word-wrap: break-word; */
+    background-color: #dd7d1bd1;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.foodDiv {
+    margin-top: 20px;
+    height: 18rem;
+    width: 3400px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: space-between;
 }
