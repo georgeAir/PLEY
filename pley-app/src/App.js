@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import NewForm from "./NewForm";
 import Nav from "./Nav";
 import RestaurantInfo from "./RestaurantsInfo";
+import Image from 'react-bootstrap/Image'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 
 const baseURL = 'http://localhost:3003'
@@ -154,26 +157,31 @@ fetch(searchURL + '/addlikes/' + restaurant._id, {
         </form>
 
 
-        <table>
-          <tbody>
-          { this.state.restaurants.map((restaurant, i) => {
-              return (
-                <tr key={restaurant._id}>
-                  <td onDoubleClick={() => this.toggleCelebrated(restaurant)}
-                  className={ restaurant.celebrated ? 'celebrated' : null}>
-                  {restaurant.name}
-                  </td>
-                  <td> {restaurant.price} </td>
-                  <td> {restaurant.rating} </td>
-                  <td> {restaurant.phone} </td>
-                  <td onClick= {() => this.showEditForm(restaurant)}> </td>
-                  <td onClick={() => this.deleteHoliday(restaurant._id)}>Delete:❌</td>
-                </tr>
-              )
-            })
-          }
-          </tbody>
-        </table>
+        { this.state.restaurants.map((restaurant, i) => {
+            return (
+              <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={restaurant.image_url} style={{ maxWidth: '12rem' }}/>
+              <Card.Body>
+                <Card.Title>{restaurant.name}</Card.Title>
+                <Card.Text>
+                  Price: {restaurant.price}
+                </Card.Text>
+                <Card.Text>
+                  Rating: {restaurant.rating}
+                </Card.Text>
+                <Card.Text>
+                  Phone Number: {restaurant.phone}
+                </Card.Text>
+                <Card.Text>
+                  {restaurant.location.display_address}
+                </Card.Text>
+                <Button variant="primary">Go to Website</Button>
+              </Card.Body>
+            </Card>
+            )
+          })
+        }
+
 
         {this.state.modalOpen && (
           <form onSubmit={this.handleSubmit}>
