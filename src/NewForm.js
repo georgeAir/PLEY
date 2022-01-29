@@ -6,16 +6,20 @@ export default class NewForm extends Component {
 
     this.state = {
       name: '',
-      cuisineType: '',
-      location: '',
-      description: '',
+      price: '',
+      likes: '',
+      img: '',
+      phone: '',
+      display_address: '',
+      timestamps:'',
     }
   }
+
 
   handleSumbit = (event) => {
     event.preventDefault()
     //fetch to the backend
-    fetch(this.props.baseUrl + '/restaurants', {
+    fetch(this.props.baseUrl + '/favorites', {
       method: 'Post',
       body: JSON.stringify({name: this.state.name}),
       headers: {
@@ -49,16 +53,19 @@ export default class NewForm extends Component {
           <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
 
           <label html='name'>Cuisine Type: </label>
-          <input type='text' id='cuisineType' name='cuisineType' onChange={(event) => this.handleChange(event)} value={this.state.cuisineType}/>
+          <input type='text' id='cuisineType' name='cuisineType' onChange={(event) => this.handleChange(event)} value={this.state.price}/>
 
           <label html='name'>Location: </label>
-          <input type='text' id='location' name='name' onChange={(event) => this.handleChange(event)} value={this.state.location}/>
+          <input type='text' id='location' name='name' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
 
           <label html='name'>Description: </label>
-          <input type='text' id='description' name='name' onChange={(event) => this.handleChange(event)} value={this.state.description}/>
+          <input type='text' id='description' name='name' onChange={(event) => this.handleChange(event)} value={this.state.img}/>
 
           <label html='name'>Likes: </label>
-          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
+          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.phone}/>
+
+          <label html='name'>Likes: </label>
+          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.display_address}/>
 
           <input type='submit' value='Add a restaurant'/>
         </form>

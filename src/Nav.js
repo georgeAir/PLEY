@@ -7,21 +7,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export default function Nav(props) {
  return (
-   <>
-
    <Navbar>
 
     <Navbar.Brand className="pley">PLEY</Navbar.Brand>
-    <Navbar.Collapse className="justify-content-end">
-
-    </Navbar.Collapse>
-    <NavDropdown className="" title="Account" id='' >
+    <NavDropdown className="dropdown" title="Account" id="nav-dropdown">
         <b>User Login:</b> <form onSubmit={props.loginUser}>
             <label htmlFor="name">Username: </label>
             <input type="text" id="name" name="username"/>
             <label htmlFor="name">Password: </label>
             <input type="password" id="password" name="password"/>
-            
+            <input type="submit" value="login" />
                </form>
         <NavDropdown.Divider />
         <b>Create Account:</b><form onSubmit={props.register}>
@@ -32,18 +27,14 @@ export default function Nav(props) {
           <input type="submit" value="sign up" />
         </form>
       </NavDropdown>
-      <Navbar.Text>
-        Signed in as: <a href="#user"></a>
-      </Navbar.Text>
     <Navbar.Toggle />
-
+    <Navbar.Collapse className="justify-content-end">
+      <Navbar.Text>
+        Signed in as: <a href="#login"></a>
+      </Navbar.Text>
+    </Navbar.Collapse>
 
 </Navbar>
-</>
-
-
-
-
 
  )
 }
