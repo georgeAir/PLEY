@@ -46,10 +46,10 @@ class App extends Component {
     }),
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + this.state.apiKey
+      'Authorization': 'Bearer ' + this.state.apiKey
 
     },
-    // credentials: 'include'
+    credentials: 'include'
   }).then(res => res.json())
   .then(resJson => {
     console.log(resJson)
@@ -69,7 +69,7 @@ register = (event) => {
     }),
     headers:{
       'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + this.state.apiKey
+      'Authorization': 'Bearer ' + this.state.apiKey
 
     }
   }).then(res => res.json())
