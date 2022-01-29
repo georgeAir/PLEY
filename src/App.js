@@ -378,7 +378,8 @@ handleChange = (event) => {
                     <tr key={favorite._id}>
                       <td onDoubleClick={() => this.toggleCelebrated(favorite)}
                       className={favorite.celebrated ? 'celebrated' : null}>
-                        {favorite.name} 
+
+                        {favorite.name}
                         </td>
                       <td> {favorite.description} </td>
                       <td>{favorite.likes}</td>
@@ -393,7 +394,8 @@ handleChange = (event) => {
           </table>
 
         {
-        this.state.modalOpen && 
+
+        this.state.modalOpen &&
 
           <form onSubmit={this.handleSubmit}>
             <label>Name: </label>
