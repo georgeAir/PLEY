@@ -7,8 +7,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 export default function Nav(props) {
  return (
-   <>
-
    <Navbar>
 
     <Navbar.Brand className="pley">PLEY</Navbar.Brand>
@@ -37,11 +35,6 @@ export default function Nav(props) {
     </Navbar.Collapse>
 
 </Navbar>
-</>
-
-
-
-
 
  )
 }
