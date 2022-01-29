@@ -53,8 +53,7 @@ class App extends Component {
   }).then(res => res.json())
   .then(resJson => {
     console.log(resJson)
-    this.getInitialBars()
-    this.getInitialRestaurants()
+
     this.getFavorites()
   })
 }
@@ -165,19 +164,19 @@ addLike = (favorite) => {
   })
 }
 
-handleSubmit = (e) => {
+handleSubmitEdit= (e) => {
   e.preventDefault()
 
   fetch(baseURL+ '/favorites/' + this.state.favoriteToBeEdited._id, {
     method: 'PUT',
     body: JSON.stringify({
       name: e.target.name.value,
-      description: e.target.description.value
+      description: e.target.price.value
     }),
     headers: {
       'Content-Type': 'application/json'
     },
-    credentials: 'include'
+    // credentials: 'include'
   }).then(res => res.json())
   .then(resJson => {
     // console.log(resJson)
@@ -244,24 +243,40 @@ handleChange = (event) => {
     })
   }
 
-      getInitialBars = () => {
-    const term = 'bar'
-    const searchURL = baseURL + '/yelp/' + term
-    fetch(searchURL)
-      .then(res => res.json())
-      .then(json => this.setState({
-        bars: json
-      }));
-  }
-
-
   getInitialRestaurants = () => {
-  const searchURL = baseURL + '/yelp/'
+  const searchURL = this.state.baseURL + '/yelp/'
   fetch(searchURL)
     .then(res => res.json())
     .then(json => this.setState({
       restaurants: json
     }));
+  }
+
+  getInitialBars = () => {
+const term = 'bars'
+const searchURL = this.state.baseURL + '/yelp/' + term
+fetch(searchURL)
+  .then(res => res.json())
+  .then(json => this.setState({
+    bars: json
+  }));
+}
+
+  getFavorites = () => {
+    //fetch to the backend
+    fetch(this.state.baseURL + '/favorites', {
+      credentials: 'include'
+    })
+    .then(res => {
+      if(res.status === 200) {
+        return res.json()
+      }else {
+        return []
+      }
+    }).then(data => {
+      // console.log(data)
+      this.setState({favorites: data})
+    })
   }
 
 
@@ -326,7 +341,7 @@ handleChange = (event) => {
 
       <h1>Bars!</h1>
 
-      <form onSubmit= {this.handleSubmit}>
+      <form onSubmit= {this.handleSubmitBar}>
         <label> Type of Bar </label>
         <input
           id="userBar"
@@ -369,35 +384,42 @@ handleChange = (event) => {
       </div>
     </section>
     <h1>Favorites</h1>
-    <NewForm baseUrl={baseURL} addFavorites={this.addFavorites} />
-    <table>
-            <tbody>
-              {
-                this.state.favorites.map((favorite, i) => {
-                  return (
-                    <tr key={favorite._id}>
-                      <td onDoubleClick={() => this.toggleCelebrated(favorite)}
-                      className={favorite.celebrated ? 'celebrated' : null}>
 
-                        {favorite.name}
-                        </td>
-                      <td> {favorite.description} </td>
-                      <td>{favorite.likes}</td>
-                      <td onClick={() => this.addLike(favorite)}>LIKE</td>
-                      <td onClick={() => this.showEditForm(favorite)}>Show Edit Form</td>
-                      <td onClick={() => this.deleteFavorites(favorite._id)}>X</td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
+    <section className="foodList">
+    <div className= "foodDiv">
+    { this.state.favorites.map((favorite, i) => {
+        return (
 
+          <Card className="barCard" style={{ width: '18rem' }}>
+          <Card.Img variant="top" src='{favorite.image_url}' style={{ width: '10rem' }}/>
+          <Card.Body>
+            <Card.Title className="favoriteName" >{favorite.name}</Card.Title>
+            <Card.Text>
+              Price: {favorite.price}
+            </Card.Text>
+            <Card.Text>
+              Likes:
+            </Card.Text>
+            <Card.Text>
+              Phone:
+            </Card.Text>
+            <Card.Text>
+
+            </Card.Text>
+            <Button variant="primary">Edit</Button>
+          </Card.Body>
+        </Card>
+
+        )
+      })
+    }
+    </div>
+  </section>
         {
 
         this.state.modalOpen &&
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmitEdit}>
             <label>Name: </label>
             <input
               name="name"
@@ -406,15 +428,15 @@ handleChange = (event) => {
             />{" "}
             <br />
 
-            <label>Description: </label>
+            <label>Price: </label>
             <input
-              name="description"
-              value={this.state.description}
+              name="price"
+              value={this.state.price}
               onChange={this.handleChange}
             />{" "}
             <br />
 
-            <button> submit</button>
+            <button>Submit</button>
           </form>
         }
       </div>
