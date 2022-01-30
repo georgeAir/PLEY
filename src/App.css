@@ -54,13 +54,14 @@ body{
 .foodList {
   overflow: scroll;
   margin: 1.5rem;
+  height: 35rem;
 }
 
 
 .foodCard{
   margin: 5px;
   background-color: orange;
-  height: 18rem;
+  height: 24rem;
   width: 15rem;
   font-size: xx-small;
 
@@ -96,25 +97,27 @@ nav{
     font-size: xx-large;
 }
 
+
+
 .foodCard {
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #orange;
+    background-color: orange;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0.25rem;
 }
 
-.card{
-  background-color: orange;
+.foodCard:hover {
+  box-shadow: 5px 12px 30px 5px rgba(255, 255, 255, 0.5);
 }
+
 
 .foodDiv {
     margin-top: 20px;
-    height: 18rem;
     width: 3400px;
     overflow: scroll;
     display: flex;
@@ -124,6 +127,8 @@ nav{
     justify-content: space-between;
     align-items: flex-end;
     align-content: space-between;
+    background-color: black;
+
 }
 .dropdown{
   display: inline;
