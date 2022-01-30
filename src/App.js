@@ -149,7 +149,7 @@ deleteFavorite = (id) => {
 
 addLike = (favorite) => {
   // console.log(holiday)
-  fetch(baseURL + '/favorites/addlikes/' + favorite._id, {
+  fetch(this.state.baseURL + '/favorites/addlikes/' + favorite._id, {
     method:'PATCH',
     credentials: 'include'
   }).then(res => res.json())
@@ -399,10 +399,11 @@ fetch(searchURL)
               Price: {favorite.price}
             </Card.Text>
             <Card.Text>
-              Likes:
+              Likes: {favorite.likes}
+              <button onClick={() => this.addLike(favorite)}>Like:❤️‍></button>
             </Card.Text>
             <Card.Text>
-              Phone:
+              Phone: {favorite.Phone}
             </Card.Text>
             <Card.Text>
               {favorite.display_address}
