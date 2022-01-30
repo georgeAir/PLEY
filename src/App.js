@@ -368,7 +368,7 @@ fetch(searchURL)
           onChange={this.handleChange}
         />
 
-        <input type="submit" value="Find Bars" onClick={this.handleSubmitBar}/>
+        <input type="submit" value="Search" onClick={this.handleSubmitBar}/>
       </form>
       <section className="foodList">
       <div className= "foodDiv">
