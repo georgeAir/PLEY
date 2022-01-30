@@ -45,7 +45,7 @@ export default class NewForm extends Component {
 
 
   render(){
-    console.log(this.state);
+    // console.log(this.state);
     return(
       <>
         <form onSubmit= {this.handleSumbit}>

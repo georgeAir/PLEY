@@ -105,28 +105,6 @@ addFavorites = (newFavorite) => {
   })
 }
 
-toggleCelebrated = (favorite) => {
-  //fetch to the backend with our id to update
-  // console.log(favorite)
-  fetch(baseURL + '/favorites/' + favorite._id, {
-    method: 'PUT',
-    body: JSON.stringify({celebrated: !favorite.celebrated}),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include'
-  }).then(res => res.json())
-  .then(resJson => {
-    // console.log(resJson)
-    const copyFavorites = [...this.state.favorites]
-    const findIndex = this.state.favorites.findIndex(
-      favorite => favorite._id === resJson.data._id)
-      copyFavorites[findIndex].celebrated = resJson.data.celebrated
-      this.setState({
-        favorites: copyFavorites
-      })
-  })
-}
 
 deleteFavorite = (id) => {
   console.log(id)
@@ -450,6 +428,7 @@ fetch(searchURL)
       })
     }
     </div>
+    <NewForm baseUrl={this.state.baseURL} addHoliday={this.addFavorites}/>
   </section>
         {
 
