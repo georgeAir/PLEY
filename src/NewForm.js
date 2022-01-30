@@ -21,7 +21,13 @@ export default class NewForm extends Component {
     //fetch to the backend
     fetch(this.props.baseURL + '/favorites', {
       method: 'POST',
-      body: JSON.stringify({name: this.state.name}),
+      body: JSON.stringify({name: this.state.name,
+        price: this.state.price,
+        likes: this.state.likes,
+        img: this.state.img,
+        Phone: this.state.Phone,
+        display_address: this.state.display_address
+      }),
       headers: {
         'Content-Type': 'application/json'
       },
@@ -31,7 +37,9 @@ export default class NewForm extends Component {
       console.log(data);
       this.props.addFavorites(data)
       this.setState({
-        name: ''
+        name: '',
+        price: '',
+        likes: '',
       })
     })
   }
@@ -52,20 +60,20 @@ export default class NewForm extends Component {
           <label html='name'>Name: </label>
           <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
 
-          <label html='name'>Cuisine Type: </label>
-          <input type='text' id='cuisineType' name='cuisineType' onChange={(event) => this.handleChange(event)} value={this.state.price}/>
+          <label html='name'>Price: </label>
+          <input type='text' id='price' name='price' onChange={(event) => this.handleChange(event)} value={this.state.price}/>
 
-          <label html='name'>Location: </label>
-          <input type='text' id='location' name='name' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
+          <label html='name'>likes: </label>
+          <input type='text' id='likes' name='likes' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
 
-          <label html='name'>Description: </label>
-          <input type='text' id='description' name='name' onChange={(event) => this.handleChange(event)} value={this.state.img}/>
+          <label html='name'>Phone: </label>
+          <input type='text' id='phone' name='phone' onChange={(event) => this.handleChange(event)} value={this.state.Phone}/>
 
-          <label html='name'>Likes: </label>
-          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.phone}/>
+          <label html='name'>Image: </label>
+          <input type='text' id='img' name='img' onChange={(event) => this.handleChange(event)} value={this.state.img}/>
 
-          <label html='name'>Likes: </label>
-          <input type='text' id='likes' name='name' onChange={(event) => this.handleChange(event)} value={this.state.display_address}/>
+          <label html='name'>Address: </label>
+          <input type='text' id='display_address' name='display_address' onChange={(event) => this.handleChange(event)} value={this.state.display_address}/>
 
           <input type='submit' value='Add a restaurant'/>
         </form>
