@@ -197,7 +197,7 @@ handleChange = (event) => {
   })
 }
 
-  showEditForm = (favorite) => {
+showEditForm = (favorite) => {
   console.log(favorite);
   this.setState({
     modalOpen: true,
@@ -206,6 +206,40 @@ handleChange = (event) => {
     favoriteToBeEdited: favorite,
   })
 }
+
+handleSubmitEdit = async (e) => {
+  // console.log(this.state.favoriteToBeEdited)
+  e.preventDefault()
+    const url = this.state.baseURL + '/favorites/' + this.state.favoriteToBeEdited
+    try{
+      const response = await fetch( url , {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: e.target.name.value,
+        }),
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        credentials: "include"
+      })
+
+      if (response.status===200){
+        const updatedFavorite = await response.json()
+        const findIndex = this.state.favorites.findIndex(favorite => favorite._id === updatedFavorite.data._id)
+        const copyFavorites = [...this.state.favorites]
+        copyFavorites[findIndex] = updatedFavorite.data
+        this.setState({
+          favorites: copyFavorites,
+          modalOpen:false
+        })
+      }
+    }
+    catch(err){
+      console.log('Error => ', err);
+    }
+  }
+
+
 
 
   handleSubmit = (event) => {
