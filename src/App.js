@@ -37,6 +37,8 @@ class App extends Component {
     // this.getRestaurants = this.getRestaurants.bind(this)
   }
 
+
+
   loginUser = (event) => {
   event.preventDefault()
   fetch(this.state.baseURL + '/users/login',{
@@ -308,7 +310,7 @@ fetch(searchURL)
     // console.log(this.state);
     return (
       <div className="App">
-        <Nav loginUser={this.loginUser} register={this.register} />
+        <Nav currentUser={this.currentUser} register={this.register} />
         <div className= 'headerName'>
         <h1>Restaurants!</h1>
         </div>
@@ -401,12 +403,11 @@ fetch(searchURL)
     <div className= 'headerName'>
     <h1>Favorites!</h1>
     </div>
-
+    <NewForm baseURL={this.state.baseURL} addFavorites={this.addFavorites}/>
     <section className="foodList">
     <div className= "foodDiv">
     { this.state.favorites.map((favorite, i) => {
         return (
-
           <Card className="foodCard" style={{ background: 'orange' }}>
           <Card.Img variant="top" src={favorite.img} style={{ width: '15rem' }}/>
           <Card.Body>
@@ -428,13 +429,10 @@ fetch(searchURL)
             <br/><button onClick={() => this.deleteFavorite(favorite._id)}>Delete:❌</button>
           </Card.Body>
         </Card>
-
-
         )
       })
     }
     </div>
-    <NewForm baseURL={this.state.baseURL} addFavorites={this.addFavorites}/>
   </section>
         {
 
