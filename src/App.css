@@ -117,17 +117,17 @@ nav{
 
 
 .foodDiv {
-    margin-top: 20px;
-    width: 3400px;
-    overflow: scroll;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow: scroll;
-    justify-content: space-between;
-    align-items: flex-end;
-    align-content: space-between;
-    background-color: black;
+  margin-top: 20px;
+  width: 3400px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  justify-content: flex-start;
+  align-items: flex-end;
+  align-content: space-between;
+  background-color: black;
 
 }
 .dropdown{
