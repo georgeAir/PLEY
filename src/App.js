@@ -384,12 +384,12 @@ fetch(searchURL)
     </section>
     <h1>Favorites</h1>
 
-    <section className="FavList">
-    <div className= "FavDiv">
+    <section className="foodList">
+    <div className= "foodDiv">
     { this.state.favorites.map((favorite, i) => {
         return (
 
-          <Card className="barCard" style={{ width: '15rem' }}>
+          <Card className="barCard" style={{ background: 'orange' }}>
           <Card.Img variant="top" src={favorite.img} style={{ width: '15rem' }}/>
           <Card.Body>
             <Card.Title className="favoriteName" >{favorite.name}</Card.Title>
@@ -397,8 +397,8 @@ fetch(searchURL)
               Price: {favorite.price}
             </Card.Text>
             <Card.Text>
-              Likes: {favorite.likes}
-              <button onClick={() => this.addLike(favorite)}>Like:❤️‍></button>
+              Likes: {favorite.likes}<br/>
+              <button onClick={() => this.addLike(favorite)}>Like:❤️‍</button>
             </Card.Text>
             <Card.Text>
               Phone: {favorite.Phone}
@@ -406,8 +406,8 @@ fetch(searchURL)
             <Card.Text>
               {favorite.display_address}
             </Card.Text>
-            <Button variant="primary">Edit</Button> <br>
-            <button onClick={() => this.deleteFavorite(favorite._id)}>Delete:❌</button>
+            <button onClick={() => this.showEditForm(favorite._id) }>Edit</button> <br/>
+            <br/><button onClick={() => this.deleteFavorite(favorite._id)}>Delete:❌</button>
           </Card.Body>
         </Card>
 
