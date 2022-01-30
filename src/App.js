@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 import BarsInfo from "./BarsInfo";
 
 
+
 const baseURL = process.env.baseURL
 
 class App extends Component {
@@ -404,7 +405,7 @@ fetch(searchURL)
               Phone:
             </Card.Text>
             <Card.Text>
-
+              {favorite.display_address}
             </Card.Text>
             <Button variant="primary">Edit</Button>
           </Card.Body>
