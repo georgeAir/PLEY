@@ -130,7 +130,7 @@ toggleCelebrated = (favorite) => {
 
 deleteFavorite = (id) => {
   console.log(id)
-  fetch(baseURL + '/favorites/' + id, {
+  fetch(this.state.baseURL + '/favorites/' + id, {
     method: 'DELETE',
     credentials: 'include'
   }).then(res => {
@@ -329,7 +329,6 @@ fetch(searchURL)
               <Card.Text>
                 {restaurant.location.display_address}
               </Card.Text>
-              <Button variant="primary">Go to Website</Button>
             </Card.Body>
           </Card>
 
@@ -375,7 +374,6 @@ fetch(searchURL)
               <Card.Text>
                 {bar.location.display_address}
               </Card.Text>
-              <Button variant="primary">Go to Website</Button>
             </Card.Body>
           </Card>
 
@@ -392,7 +390,7 @@ fetch(searchURL)
         return (
 
           <Card className="barCard" style={{ width: '18rem' }}>
-          <Card.Img variant="top" src='{favorite.image_url}' style={{ width: '10rem' }}/>
+          <Card.Img variant="top" src={favorite.img} style={{ width: '18rem' }}/>
           <Card.Body>
             <Card.Title className="favoriteName" >{favorite.name}</Card.Title>
             <Card.Text>
@@ -409,8 +407,10 @@ fetch(searchURL)
               {favorite.display_address}
             </Card.Text>
             <Button variant="primary">Edit</Button>
+            <button onClick={() => this.deleteFavorite(favorite._id)}>Delete:❌</button>
           </Card.Body>
         </Card>
+
 
         )
       })
