@@ -7,7 +7,7 @@ export default class NewForm extends Component {
     this.state = {
       name: '',
       price: '',
-      likes: '',
+      likes: '0',
       img: '',
       phone: '',
       display_address: '',
@@ -25,7 +25,7 @@ export default class NewForm extends Component {
         price: this.state.price,
         likes: this.state.likes,
         img: this.state.img,
-        Phone: this.state.Phone,
+        phone: this.state.phone,
         display_address: this.state.display_address
       }),
       headers: {
@@ -39,7 +39,10 @@ export default class NewForm extends Component {
       this.setState({
         name: '',
         price: '',
+        phone: '',
         likes: '',
+        img: '',
+        display_address: '',
       })
     })
   }
@@ -67,7 +70,7 @@ export default class NewForm extends Component {
           <input type='text' id='likes' name='likes' onChange={(event) => this.handleChange(event)} value={this.state.likes}/>
 
           <label html='name'>Phone: </label>
-          <input type='text' id='phone' name='phone' onChange={(event) => this.handleChange(event)} value={this.state.Phone}/>
+          <input type='text' id='phone' name='phone' onChange={(event) => this.handleChange(event)} value={this.state.phone}/>
 
           <label html='name'>Image: </label>
           <input type='text' id='img' name='img' onChange={(event) => this.handleChange(event)} value={this.state.img}/>

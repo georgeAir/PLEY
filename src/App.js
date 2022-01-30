@@ -413,7 +413,7 @@ fetch(searchURL)
               <button onClick={() => this.addLike(favorite)}>Like:❤️‍</button>
             </Card.Text>
             <Card.Text>
-              Phone: {favorite.Phone}
+              Phone: {favorite.phone}
             </Card.Text>
             <Card.Text>
               {favorite.display_address}
