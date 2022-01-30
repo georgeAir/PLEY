@@ -21,13 +21,24 @@ export default class Nav extends Component {
       timestamps:'',
     }
   }
+
+  NavDropdown = (props) => {
+    const currentUser = props.currentUser;
+      if (currentUser) {
+        return <NavDropdown/>
+      }
+      return <NavDropdown.Divider/>
+  }
+
+
+
 render(){
  return (
    <Navbar>
 
     <Navbar.Brand className="pley">PLEY</Navbar.Brand>
     <NavDropdown className="dropdown" title="Account" id="nav-dropdown">
-        <b>User Login:</b> <form onSubmit={this.props.loginUser}>
+        <b>User Login:</b> <form onSubmit={this.props.currentuser}>
             <label htmlFor="name">Username: </label>
             <input type="text" id="name" name="username"/>
             <label htmlFor="name">Password: </label>
@@ -46,7 +57,7 @@ render(){
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
       <Navbar.Text>
-        Signed in as: {this.props.loginUser}
+        Signed in as: {this.props.currentUser}
       </Navbar.Text>
     </Navbar.Collapse>
 
