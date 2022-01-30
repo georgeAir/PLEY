@@ -428,7 +428,7 @@ fetch(searchURL)
       })
     }
     </div>
-    <NewForm baseUrl={this.state.baseURL} addHoliday={this.addFavorites}/>
+    <NewForm baseURL={this.state.baseURL} addFavorites={this.addFavorites}/>
   </section>
         {
 

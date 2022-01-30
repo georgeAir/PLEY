@@ -16,11 +16,11 @@ export default class NewForm extends Component {
   }
 
 
-  handleSumbit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault()
     //fetch to the backend
-    fetch(this.props.baseUrl + '/favorites', {
-      method: 'Post',
+    fetch(this.props.baseURL + '/favorites', {
+      method: 'POST',
       body: JSON.stringify({name: this.state.name}),
       headers: {
         'Content-Type': 'application/json'
@@ -28,8 +28,8 @@ export default class NewForm extends Component {
     }).then(res => {
       return res.json()
     }).then( data => {
-      // console.log(data);
-      this.props.addRestaurant(data)
+      console.log(data);
+      this.props.addFavorites(data)
       this.setState({
         name: ''
       })
@@ -48,7 +48,7 @@ export default class NewForm extends Component {
     // console.log(this.state);
     return(
       <>
-        <form onSubmit= {this.handleSumbit}>
+        <form onSubmit= {this.handleSubmit}>
           <label html='name'>Name: </label>
           <input type='text' id='name' name='name' onChange={(event) => this.handleChange(event)} value={this.state.name}/>
 
