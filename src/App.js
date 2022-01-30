@@ -309,9 +309,11 @@ fetch(searchURL)
     return (
       <div className="App">
         <Nav loginUser={this.loginUser} register={this.register} />
+        <div className= 'headerName'>
         <h1>Restaurants!</h1>
+        </div>
         <form onSubmit= {this.handleSubmit}>
-          <label> Type of restaurant </label>
+          <label></label>
           <input
             id="userTerm"
             type="text"
@@ -350,15 +352,16 @@ fetch(searchURL)
       </div>
       </section>
 
-
-      <h1>Bars!</h1>
+      <div className= 'headerName'>
+      <h1>Open Search!</h1>
+      </div>
 
       <form onSubmit= {this.handleSubmitBar}>
-        <label> Type of Bar </label>
+        <label></label>
         <input
           id="userBar"
           type="text"
-          placeholder="Enter type of bar"
+          placeholder="Search Anything"
           value={this.state.userBar}
           onChange={this.handleChange}
         />
@@ -394,14 +397,17 @@ fetch(searchURL)
       }
       </div>
     </section>
-    <h1>Favorites</h1>
+
+    <div className= 'headerName'>
+    <h1>Favorites!</h1>
+    </div>
 
     <section className="foodList">
     <div className= "foodDiv">
     { this.state.favorites.map((favorite, i) => {
         return (
 
-          <Card className="barCard" style={{ background: 'orange' }}>
+          <Card className="foodCard" style={{ background: 'orange' }}>
           <Card.Img variant="top" src={favorite.img} style={{ width: '15rem' }}/>
           <Card.Body>
             <Card.Title className="favoriteName" >{favorite.name}</Card.Title>
